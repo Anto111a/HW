@@ -16,7 +16,7 @@ x2 = ...
 Корни: 
 x1 = 2
 x2 = -2 */
-let quadraticEquation = (arr) => {
+const quadraticEquation = (arr) => {
     const [a,b = 0,c = 0] = arr;
     const isValidInput = a && a!=0 && Number.isInteger(a) && Number.isInteger(b) && Number.isInteger(c);
     let result;
@@ -24,16 +24,13 @@ let quadraticEquation = (arr) => {
         return console.log(result = `Некорректный ввод`);
     } 
 
+    const discriminant = b**2-4*a*c;
+    const formatedPartA = (a === 1 || a === -1) ? (a===1 ? `x^2`:`-x^2`) : (`${a}*x^2`);
+    const formatedPartB = (b === 1 || b === -1) ? (b===1 ? `+ x` : `- x`) : ( b === 0 ? `` : (b > 0 ? ` + ${b}*x` : ` ${b}*x`));
+    const formatedPartC = (c === 0 ? `` : (c > 0 ? ` + ${c}` : ` ${c}`));
     
-    let discriminant = b**2-4*a*c;
-    let formated_a_part = (a === 1 || a === -1) ? (a===1 ? `x^2`:`-x^2`) : (`${a}*x^2`);
-    let formated_b_part = (b === 1 || b === -1) ? (b===1 ? `+ x` : `- x`) : ( b === 0 ? `` : (b > 0 ? ` + ${b}*x` : ` ${b}*x`));
-    let formated_c_part = (c === 0 ? `` : (c > 0 ? ` + ${c}` : ` ${c}`));
+    result = ` уравнение: ${formatedPartA}${formatedPartB}${formatedPartC} = 0 \n Дискриминант: ${discriminant}`;
     
-    result = ` уравнение: ${formated_a_part}${formated_b_part}${formated_c_part} = 0 \n Дискриминант: ${discriminant}`;
-    
-    //result = `уравнение: ${a}*x^2 + ${b}*x + ${c} = 0 \nДискриминант: ${discriminant}`; 
-
     if(discriminant<0) {
         result = result + ` \nДискриминант отрицательный, корней нет!`;
     } else if (discriminant===0) {
@@ -41,8 +38,8 @@ let quadraticEquation = (arr) => {
     } else {
         result = result + `\n Корни: \n x1 = ${ ((b * -1 + Math.sqrt(discriminant)) / (2 * a)) } \n x2 = ${ ((b * -1 - Math.sqrt(discriminant)) / (2 * a)) }`;
     }
-    
-    return console.log(result);
-} 
 
-quadraticEquation([1, 0, -4])
+    return result;
+}
+
+console.log(quadraticEquation([1, 0, -4])); 
