@@ -21,7 +21,7 @@ const quadraticEquation = (arr) => {
     const isValidInput = a && a!=0 && Number.isInteger(a) && Number.isInteger(b) && Number.isInteger(c);
     let result;
     if(!isValidInput) {
-        return console.log(result = `Некорректный ввод`);
+        return result = `Некорректный ввод`;
     } 
 
     const discriminant = b**2-4*a*c;
