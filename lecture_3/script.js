@@ -82,5 +82,5 @@ triangle1.draw({
   pointBy: 100,
   pointCx: 30,
   pointCy: 100,
-  color:'#d02510'
+  color:'green'
 });
