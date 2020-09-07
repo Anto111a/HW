@@ -27,8 +27,6 @@ class Shape {
   draw(color) {
     if (!this.getCanvas(this.canvasId)) {
       this.createCanvas();
-    } else {
-      console.log(this.getCanvas(this.canvasId));
     }
 
     this.ctx = this.getCanvas(this.canvasId).getContext('2d');
