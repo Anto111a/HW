@@ -36,7 +36,7 @@ function createList(data) {
     div.id = 'filmsList'
   }
 
-  for (let element of data) {
+  for (const element of data) {
     const currentElement = element.show;
     const  wrapper = document.createElement('div');
 
