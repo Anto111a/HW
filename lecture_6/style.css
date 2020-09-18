@@ -25,3 +25,8 @@ main {
 #filmsList > div > img{
   align-self: start;
 }
+
+#filmsList > div > h2, h3, h4{
+  align-self: start;
+  width: 50%;
+}
