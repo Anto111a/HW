@@ -5,16 +5,16 @@ function getData(req) {
   })
   .catch(function (error) {
     console.log(error);
-  })
+  });
 }
-   
+
 const form = document.querySelector('#form');
 form.addEventListener('submit', formHandler);
 
 function formHandler(event) {
   event.preventDefault();
   const inputValue = event.target.input.value;
-  if(inputValue) {
+  if (inputValue) {
     getData(inputValue)
     .then((response) => {
       const data = response;
@@ -22,10 +22,9 @@ function formHandler(event) {
     })
     .catch(function (error) {
       console.log(error);
-    })
+    });
   }
-  
-};
+}
 
 function createList(data) {
   let div = document.querySelector('#filmsList')
@@ -37,38 +36,32 @@ function createList(data) {
     div.id = 'filmsList'
   }
 
-  //console.log(data);
-  for(let element of data) {
+  for (let element of data) {
     const currentElement = element.show;
-    const  wraper = document.createElement('div');
-    // wraper.style = 'border-bottom: 2px solid grey; margin-bottom: 35px';
-    
-    const header = document.createElement('h2');
-    header.innerText = currentElement.name;
-    wraper.append(header);
+    const  wrapper = document.createElement('div');
 
     const img = document.createElement('img');
-    const defImg ='./lecture_6/no-image.jpg';
-    img.src = currentElement.image?currentElement.image.medium:defImg;
-    wraper.append(img);
+    const defImg = './lecture_6/no-image.jpg';
+    img.src = currentElement.image ? currentElement.image.medium : defImg;
+    wrapper.append(img);
+
+    const header = document.createElement('h2');
+    header.innerText = currentElement.name;
+    wrapper.append(header);
 
     const premiered = document.createElement('h4');
-    premiered.innerText = `Премьера: ${currentElement.premiered||'-'}`;
-    wraper.append(premiered);
+    premiered.innerText = `Премьера : ${currentElement.premiered || '-'}`;
+    wrapper.append(premiered);
 
     const genre = document.createElement('h4');
-    genre.innerText =  `Жанр: ${currentElement.genres.join(', ')||'-'}`;
-    wraper.append(genre);
+    genre.innerText = `Жанр: ${currentElement.genres.join(', ') || '-'}`;
+    wrapper.append(genre);
 
     const rating = document.createElement('h3');
-    rating.innerText = `Рейтинг:  ${currentElement.rating.average||'-'}`;
-    wraper.append(rating);
-    div.append(wraper)
+    rating.innerText = `Рейтинг:  ${currentElement.rating.average || '-'}`;
+    wrapper.append(rating);
+    div.append(wrapper);
   }
 
-  //console.log(div);
-  
-  main.appendChild(div)
-  //return div;
+  main.appendChild(div);
 }
-

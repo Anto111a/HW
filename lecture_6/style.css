@@ -6,12 +6,22 @@ main {
   align-items: center;
 }
 
-main > div > div{
+#filmsList {
   width: 100%;
-  border-bottom: 2px solid grey;
-  margin-bottom: 35px;
+  }
+
+#filmsList > div {
+  margin: 35px auto;
+  padding-bottom: 20px;
+  max-height: 295px;
+  width: 60%;
+  border-bottom: 2px solid gray;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  max-height: 200px;
+  align-items: center;
+}
+
+#filmsList > div > img{
+  align-self: start;
 }
