@@ -5,52 +5,59 @@ const imageElement = document.getElementById('image');
 
 function myFetch(url, options) {
 
-    return new Promise(function(resolve, reject) {
-      const xhr = new XMLHttpRequest();
-      xhr.open(options, url);
-      xhr.responseType = 'arraybuffer';
+  return new Promise(function (resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.open(options, url);
+    xhr.responseType = 'arraybuffer';
+    
 
-      xhr.json = function() {
-        const json = JSON.stringify(xhr);
-        return (json);
-      };
-
-      xhr.blob = function() {
+    xhr.json = () => {
+      return new Promise(function (resolve, reject) {
         console.log(xhr);
-            const blob = new Blob([xhr.response], {type:'image/jpeg'});
-            return blob;
-          };
+        const json = (xhr.response);
+        resolve(json);
+      })
+    }
 
-      xhr.onload = function() {
-        if (xhr.status == 200) {
-           resolve(xhr);
-        } else {
-          const error = new Error(this.statusText);
-          error.code = this.status;
-          reject(error);
-        } 
-      };
-      
-      xhr.onerror = function() {
-        reject(new Error("Network Error"));
-      };
+    xhr.blob = () => {
+      return new Promise(function (resolve, reject) {
+       
+        const blob = new Blob([(xhr.response)], {
+          type: 'image/jpeg'
+        });
+        resolve(blob);
+      })
+    }
 
-      xhr.send();
-         });
-  }
+    xhr.onload = function () {
+      if (xhr.status == 200) {
+        resolve(xhr);
+      } else {
+        const error = new Error(xhr.statusText);
+        error.code = xhr.status;
+        reject(error);
+      }
+    };
+
+    xhr.onerror = function () {
+      reject(new Error("Network Error"));
+    };
+
+    xhr.send();
+  });
+}
 
 // 2. Загрузить изображение, преобразовать его в Blob и используя FileReader преобразовать в формат DataUrl, далее используя функцию insertImage вставить DataUrl в тег img (добавить обработку ошибок)
 
 myFetch(IMAGE_API_URL, 'GET')
+  .then(response => response.blob())
   .then(response => {
-    const file = response.blob();
-    console.log(file);
+    const file = response;
     const reader = new FileReader();
-    
-    reader.onload = function() {
+
+    reader.onload = function () {
       insertImage(reader.result);
     }
-
     reader.readAsDataURL(file);
   })
   .catch(error => {
@@ -58,6 +65,5 @@ myFetch(IMAGE_API_URL, 'GET')
   })
 
 function insertImage(src) {
-    imageElement.src = src
+  imageElement.src = src
 }
-
