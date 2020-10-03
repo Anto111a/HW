@@ -1,0 +1,34 @@
+main {
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  margin: 0 auto;
+  align-items: center;
+}
+
+#filmsList {
+  width: 100%;
+}
+
+#filmsList > div {
+  margin: 35px auto;
+  padding-bottom: 20px;
+  max-height: 295px;
+  width: 60%;
+  border-bottom: 2px solid gray;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#filmsList > div > img {
+  align-self: start;
+}
+
+#filmsList > div > h2,
+h3,
+h4 {
+  align-self: start;
+  width: 50%;
+}
