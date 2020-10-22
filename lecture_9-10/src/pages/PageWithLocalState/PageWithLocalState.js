@@ -8,6 +8,7 @@ import UsersList from '../../components/UsersList/UsersList.js';
 export default function PageWithLocalState() {
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
+  const [isError, setError] = useState(false)
 
   useEffect(() => {
     setLoading(true);
@@ -15,11 +16,20 @@ export default function PageWithLocalState() {
     .then(res => {
       setItems(res);
     })
+    .catch (err => {
+      console.error(err);
+      setError(true)
+    })
     .finally(() => {
       setLoading(false);
     })
   }, [])
 
+  if (isError) {
+    return(
+      <h2> Something went wrong </h2>
+    )
+  }
   if (loading) {
     return (
       <Spinner animation="border" variant="success" style={{width: '8rem', height: '8rem'}}/>

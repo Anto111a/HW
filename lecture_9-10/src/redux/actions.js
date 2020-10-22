@@ -2,26 +2,29 @@ import * as types from './types.js';
 import '../api/api.js';
 import {api} from '../api/api.js';
 
-export const getUsersList = () => {
+export const requestUsers = () => {
   return dispatch => {
-    dispatch (setLoader(true))
+      dispatch(getUsersList())
       api.get()
       .then( result => {
-        dispatch(setUsersList(result));
-        dispatch(setLoader(false));
+        dispatch(receiveUsersList(result))
       })
       .catch (err => {
+        dispatch(requestFailed());
         console.log(err);
       })
   }
 }
 
-const setLoader = currentState => ({
-  type: types.SET_LOADER,
-  payload: currentState
+const requestFailed = () => ({
+  type: types.REQUEST_FAILED
 })
- 
-const setUsersList = list => ({
-  type: types.SET_USERS_LIST,
+
+const getUsersList = () => ({
+   type: types.GET_USERS_LIST
+})
+
+const receiveUsersList = list => ({
+  type: types.RECEIVE_USERS_LIST,
   payload: list
 })
