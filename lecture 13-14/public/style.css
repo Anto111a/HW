@@ -1,0 +1,32 @@
+div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.container>div {
+  width: 100%;
+}
+.container>div>img {
+  margin: 20px;
+  transition: 0.5s;
+}
+
+.container>div>img:hover {
+  box-shadow: 0px 0px 10px 6px rgba(0,0,0,0.71);
+}
+
+.button {
+  text-decoration: none;
+  padding: 5px 15px;
+  border: 1px solid rgb(46, 66, 173);
+  border-radius: 5px;
+  background-color:  rgb(48, 61, 134);
+  color: azure;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background-color:  rgba(228, 247, 247, 0.966);
+  color: rgb(48, 61, 134);
+  box-shadow:inset 0px 0px 5px 4px rgba(0,0,0,0.71);
+}
